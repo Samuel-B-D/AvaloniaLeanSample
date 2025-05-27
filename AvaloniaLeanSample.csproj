@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <SelfContained>true</SelfContained>
+        <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
+        <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+        <OptimizationPreference>Speed</OptimizationPreference>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+
+        <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+        <UseFastDeployment>false</UseFastDeployment>
+        <RunAOTCompilation>true</RunAOTCompilation>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <StripSymbols>true</StripSymbols>
+        <TrimMode>link</TrimMode>
+        <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+        <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
+        <UseAppHost>true</UseAppHost>
+        <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+
+        <TrimmerRootDescriptorFiles>linker.rd.xml</TrimmerRootDescriptorFiles>
+    </PropertyGroup>
+
+
+    <PropertyGroup>
+        <!-- Both of these settings increase the baseline memory usage,
+             but gives a better overall memory footprint during the runtime
+             of the application.
+        -->
+        <ServerGarbageCollection>true</ServerGarbageCollection>
+        <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+        
+        <ThreadPoolMinThreads>4</ThreadPoolMinThreads>
+        <ThreadPoolMaxThreads>64</ThreadPoolMaxThreads>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <RuntimeHostConfigurationOption Include="System.Net.DisableIPv6" Value="true" />
+        <RuntimeHostConfigurationOption Include="System.GC.LatencyLevel" Value="1" />
+        <RuntimeHostConfigurationOption Include="System.GC.HeapHardLimit" Value="20971520" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.3.0"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.0"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0"/>
+
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.0">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+</Project>
