@@ -1,6 +1,6 @@
 ﻿## Command to properly build:
 ```bash
-dotnet publish -r win-x64 --self-contained=true -p:PublishReadyToRun=true -c Release
+dotnet publish -r win-x86 --self-contained=true -p:PublishReadyToRun=true -c Release
 ```
 
 # Avalonia Lean Sample
