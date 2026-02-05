@@ -1,3 +1,3 @@
 # THIS IS A MIRROR.
-Development occurs on Codeberg:
+## Main repo is on Codeberg:
 https://codeberg.org/Kaz/AvaloniaLeanSample
