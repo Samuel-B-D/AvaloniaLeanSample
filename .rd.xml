@@ -1,5 +1,0 @@
-﻿<linker>
-    <assembly fullname="AvaloniaLeanSample" preserve="all" />
-    <assembly fullname="Avalonia.Base" preserve="required-members" />
-    <assembly fullname="Avalonia.Controls" preserve="required-members" />
-</linker>
